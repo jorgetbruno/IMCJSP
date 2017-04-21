@@ -5,9 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Calculo IMC</title>
+    <title>Calculo IMC JSP</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="scripts/master.js"></script>
 </head>
 
 <body>
@@ -50,5 +49,49 @@
             </div>
         </div>
     </div>
+    <!-- Scriptlet. Código Java na página JSP. -->
+    <%
+    String heightStr = request.getParameter("height");
+    String weightStr = request.getParameter("weight");
+    String sexStr = request.getParameter("sex");
+    String mensagem = "";
+    String tipoMensagem = "";
+
+    int height = Integer.parseInt(heightStr);
+    int weight = Integer.parseInt(weightStr);
+
+    int imc = weight / (height * height);
+
+    System.out.print(sexStr);
+    if(sexStr.equals("Male")){
+      if (imc < 20) {
+        mensagem = "Abaixo do peso!";
+        tipoMensagem = "warning";
+      } else if (imc < 26.4) {
+        mensagem = "Peso ideal, good job";
+        tipoMensagem = "success";
+      } else {
+        mensagem = "Acima do peso!";
+        tipoMensagem = "warning";
+      }
+    }else{
+      if (imc < 19.1) {
+        mensagem = "Abaixo do peso!";
+        tipoMensagem = "warning";
+      } else if (imc < 25.8) {
+        mensagem = "Peso ideal, nice";
+        tipoMensagem = "success";
+      } else {
+        mensagem = "Acima do peso!";
+        tipoMensagem = "warning";
+      }
+    }
+
+
+    %>
+    <!-- Utilização de vaviáveis em expressões JSP. -->
+      <div class="alert alert-<%=tipoMensagem%>" role="alert" style="margin-top:45px"><%=mensagem%></div>
+    </div>
+
   </body>
 </html>
