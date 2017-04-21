@@ -63,7 +63,6 @@
 
           float imc = weight / (height * height);
 
-          System.out.print(sexStr);
           if(sexStr.equals("Male")){
             if (imc < 20) {
               mensagem = "Abaixo do peso!";
