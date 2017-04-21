@@ -38,59 +38,61 @@
                             </div>
                             <div class="form-group">
                                 <label for="sex">Select Sex:</label>
-                                <select class="form-control" id="sex">
+                            <select class="form-control" id="sex" name="sex">
                               <option>Male</option>
                               <option>Female</option>
                             </select>
                             </div>
-                            <button class="btn btn-sm btn-success" type="button" onclick="calcular()">Calcular</a>
+                            <button class="btn btn-sm btn-success">Calcular</button>
                         </fieldset>
                 </form>
             </div>
         </div>
-    </div>
-    <!-- Scriptlet. Código Java na página JSP. -->
-    <%
-    String heightStr = request.getParameter("height");
-    String weightStr = request.getParameter("weight");
-    String sexStr = request.getParameter("sex");
-    String mensagem = "";
-    String tipoMensagem = "";
+        <!-- Scriptlet. Código Java na página JSP. -->
+        <%
+        String heightStr = request.getParameter("height");
+        String weightStr = request.getParameter("weight");
+        String sexStr = request.getParameter("sex");
+        String mensagem = "";
+        String tipoMensagem = "";
 
-    int height = Integer.parseInt(heightStr);
-    int weight = Integer.parseInt(weightStr);
+        if( ! heightStr.isEmpty() && !weightStr.isEmpty() && ! sexStr.isEmpty()){
 
-    int imc = weight / (height * height);
+          float weight = Float.parseFloat(weightStr);
+          float height = Float.parseFloat(heightStr);
 
-    System.out.print(sexStr);
-    if(sexStr.equals("Male")){
-      if (imc < 20) {
-        mensagem = "Abaixo do peso!";
-        tipoMensagem = "warning";
-      } else if (imc < 26.4) {
-        mensagem = "Peso ideal, good job";
-        tipoMensagem = "success";
-      } else {
-        mensagem = "Acima do peso!";
-        tipoMensagem = "warning";
-      }
-    }else{
-      if (imc < 19.1) {
-        mensagem = "Abaixo do peso!";
-        tipoMensagem = "warning";
-      } else if (imc < 25.8) {
-        mensagem = "Peso ideal, nice";
-        tipoMensagem = "success";
-      } else {
-        mensagem = "Acima do peso!";
-        tipoMensagem = "warning";
-      }
-    }
+          float imc = weight / (height * height);
 
+          System.out.print(sexStr);
+          if(sexStr.equals("Male")){
+            if (imc < 20) {
+              mensagem = "Abaixo do peso!";
+              tipoMensagem = "warning";
+            } else if (imc < 26.4) {
+              mensagem = "Peso ideal, good job son";
+              tipoMensagem = "success";
+            } else {
+              mensagem = "Acima do peso!";
+              tipoMensagem = "warning";
+            }
+          }else{
+            if (imc < 19.1) {
+              mensagem = "Abaixo do peso!";
+              tipoMensagem = "warning";
+            } else if (imc < 25.8) {
+              mensagem = "Peso ideal, nice";
+              tipoMensagem = "success";
+            } else {
+              mensagem = "Acima do peso!";
+              tipoMensagem = "warning";
+            }
+          }
+        }
 
-    %>
-    <!-- Utilização de vaviáveis em expressões JSP. -->
-      <div class="alert alert-<%=tipoMensagem%>" role="alert" style="margin-top:45px"><%=mensagem%></div>
+        %>
+        <!-- Utilização de vaviáveis em expressões JSP. -->
+        <div class="alert alert-<%=tipoMensagem%>" role="alert" style="margin-top:45px"><%=mensagem%></div>
+      </div>
     </div>
 
   </body>
