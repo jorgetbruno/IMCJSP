@@ -56,7 +56,8 @@
         String mensagem = "";
         String tipoMensagem = "";
 
-        if( ! heightStr.isEmpty() && !weightStr.isEmpty() && ! sexStr.isEmpty()){
+
+        if(  heightStr != null && weightStr != null && ! heightStr.isEmpty() && ! weightStr.isEmpty()){
 
           float weight = Float.parseFloat(weightStr);
           float height = Float.parseFloat(heightStr);
@@ -86,6 +87,7 @@
               tipoMensagem = "warning";
             }
           }
+          
         }
 
         %>
